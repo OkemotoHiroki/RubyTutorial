@@ -23,7 +23,7 @@ class Saraly_Class
     end
 end
 
-print "手取りを計算します（年額）"
+puts "手取りを計算します（年額）"
 print "時給を入力："
 hourly_wage = gets.to_i
 print "労働時間を入力："
@@ -31,4 +31,4 @@ working_hour = gets.to_i
 
 s = Saraly_Class.new(hourly_wage,working_hour)
 
-puts "手取りは{#s.get_after_tax}円です。"
+puts "手取りは#{s.get_after_tax}円です。"
