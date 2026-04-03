@@ -1,5 +1,6 @@
 class Salary_Cal
     def initialize(hourly_wage,working_hour)
+        raise ArgumentError, "自然数を入力してください。" if hourly_wage <=0 or working_hour <=0
         @hourly_wage = hourly_wage #時給
         @working_hour = working_hour #労働時間
         @saraly = hourly_wage * working_hour #給料
@@ -39,12 +40,19 @@ class Controller
     
     def run
         puts "手取りを計算します（年額）"
-        print "時給を入力："
-        hourly_wage = gets.to_i
-        print "労働時間を入力："
-        working_hour = gets.to_i
-        cal = Salary_Cal.new(hourly_wage,working_hour)
-        @view.output_after_tax(cal.get_after_tax)
+        
+        begin
+            print "時給を入力："
+            hourly_wage = Integer(gets)
+            print "労働時間を入力："
+            working_hour = Integer(gets)
+            cal = Salary_Cal.new(hourly_wage,working_hour)
+            @view.output_after_tax(cal.get_after_tax)
+        rescue ArgumentError,TypeError => e
+            puts e.message
+            puts "入力をはじめからやり直します。"
+            retry
+        end
     end
 end
 
